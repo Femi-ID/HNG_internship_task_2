@@ -38,5 +38,5 @@ The application only emphasis on basic **CRUD** functionalities.
 * Set Debug = False
 * Include your domain name in the allowed hosts list.
 
-**Check the [README](https://github.com/Femi-ID/HNG_Internship_task_2/blob/master/READ.md) for more info on running the server locally.**
+**Check the [README](https://github.com/Femi-ID/HNG_Internship_task_2) for more info on running the server locally.**
 #### _And your good to go!_
