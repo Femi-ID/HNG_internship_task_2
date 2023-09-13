@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import PersonInfoForm, PersonDeleteForm
+from .forms import PersonInfoForm, PersonDeleteForm, PersonEditForm
 from .models import Person
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
@@ -22,11 +22,12 @@ def create_user(request):
                                                email=cd['email'], bio=cd['bio'])
             new_person.save()
             messages.success(request, 'New person account successfully created!')
-            return redirect('crud_app:display_all_users', 200)
+            return redirect('crud_app:display_all_users')
         else:
-            messages.error(request, 'Invalid credentials inputted!')
+            messages.error(request, 'Invalid field type: First and last name must be alphabets only!')
+            return redirect('crud_app:create_user')
     else:
-        #
+        # display profile form
         form = PersonInfoForm()
         return render(request, 'create_user.html', {'form': form})
 
@@ -36,7 +37,7 @@ def display_user(request, user_id):
     user = get_object_or_404(Person, id=user_id)
     if user:
         if request.method == 'POST':
-            edit_form = PersonInfoForm(request.POST, instance=user)
+            edit_form = PersonEditForm(request.POST, instance=user)
             delete_form = PersonDeleteForm(request.POST)
 
             # validate edit_form and UPDATE user profile
@@ -48,17 +49,20 @@ def display_user(request, user_id):
             # validate delete_form and DELETE user profile
             if delete_form.is_valid():
                 cd_delete = delete_form.cleaned_data
-                if cd_delete['confirm_delete']:
+                if cd_delete['delete_my_profile']:
                     Person.objects.filter(id=user.id).delete()
                     messages.success(request, 'Profile successfully deleted.')
                     return redirect('crud_app:display_all_users')
+                else:
+                    messages.info(request, 'Make sure you tick the checkbox before deleting profile.')
+                    return redirect('crud_app:display_user', user.id)
             else:
                 messages.error(request, 'Something went wrong :( Confirm inputted values and try again.')
                 return redirect('crud_app:display_all_users')
 
         else:
             # To READ profile info
-            edit_form = PersonInfoForm(instance=user)
+            edit_form = PersonEditForm(instance=user)
             delete_form = PersonDeleteForm()
             return render(request, 'user_detail.html', {'user': user,
                                                         'edit_form': edit_form,

@@ -1,4 +1,11 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
+
+# custom validator to accept only string values
+def validate_string(value):
+    if not isinstance(value, str):
+        raise ValidationError("Only strings values are allowed here.")
 
 
 class Person(models.Model):
