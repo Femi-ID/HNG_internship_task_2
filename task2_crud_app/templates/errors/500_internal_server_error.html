@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    {% extends 'base_errors.html' %}
+    {% block title %}500 Internal Error {% endblock %}
+
+    {% block content %}
+        <h1>Oops...Something happened</h1>
+        <h3>An unexpected error has occurred.</h3>
+        <p>Abeg notify administrator. Sorry for the inconvenience!</p>
+        <p><a href="{% url 'crud_app:display_all_users' %}">Go Back</a></p>
+    {% endblock %}
+</body>
+</html>

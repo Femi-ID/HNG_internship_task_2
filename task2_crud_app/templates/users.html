@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %} All Users {% endblock %}
+
+    {% block content %}
+        <h3>List of all users created.</h3>
+        <ol>
+            {% for user in users %}
+                <li>
+                    <a href="{% url 'crud_app:display_user' user.id %}">{{ user.first_name }}</a><br>
+                </li>
+            {% endfor %}
+        </ol>
+
+
+        <h4><a href="{% url 'crud_app:create_user' %}">Create new profile</a></h4>
+    {% endblock %}
+</body>
+</html>

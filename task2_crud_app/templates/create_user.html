@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %} Create New User {% endblock %}
+
+    {% block content %}
+        <h3>Please fill in the form to create a new person profile.</h3>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="CREATE">
+        </form>
+
+        <p>Go back <a href="{% url 'crud_app:display_all_users' %}"><b>Home</b></a></p>
+    {% endblock %}
+</body>
+</html>

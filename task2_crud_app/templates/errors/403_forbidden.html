@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    {% extends 'base_errors.html' %}
+    {% block title %} Forbidden {% endblock %}
+
+    {% block content %}
+        <h1>Forbidden request.</h1>
+        <h3>:( Permission denied. Only authorised users can access this page.</h3>
+        <p><a href="{% url 'crud_app:display_all_users' %}">Go Back</a></p>
+    {% endblock %}
+</body>
+</html>

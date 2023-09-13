@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %} {{user.first_name }} profile {% endblock %}
+
+    {% block content %}
+        <h3>Your profile details.</h3>
+        <p>
+            First Name: {{ user.first_name|title }}<br>
+            Last Name: {{ user.last_name|title }}<br>
+            Email: {{ user.email }}<br>
+            Bio: {{ user.bio }}
+        </p>
+        <p>Go back <a href="{% url 'crud_app:display_all_users' %}"><b>Home</b></a></p>
+
+        <h3>Delete user profile here</h3>
+        <form method="post">
+            {{ delete_form }}
+            {% csrf_token %}
+            <input type="submit" value="DELETE">
+        </form>
+
+        <hr>
+        <h3>You can edit your information here.</h3>
+
+        <form method="post">
+            {{ edit_form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="EDIT">
+        </form>
+    {% endblock %}
+</body>
+</html>

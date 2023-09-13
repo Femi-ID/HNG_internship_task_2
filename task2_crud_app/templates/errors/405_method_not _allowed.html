@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    {% extends 'base_errors.html' %}
+    {% block title %}Method Not Allowed {% endblock %}
+
+    {% block content %}
+        <h1>Method Not Allowed</h1>
+        <h3>:( The method used to request this resource is not allowed.</h3>
+        <p><a href="{% url 'crud_app:display_all_users' %}">Go Back</a></p>
+    {% endblock %}
+</body>
+</html>
